@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz | The Velvet Journal</title>
+  <link rel="stylesheet" href="styless.css">
+  <script src="script.js"></script>
+</head>
+<body>
+  <header>
+    <div class="nav-container">
+      <div class="logo">The Velvet Journal</div>
+      <div class="hamburger" onclick="toggleNav()">&#9776;</div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="shelf.html">The Velvet Shelf</a></li>
+        <li><a href="glow.html">Glow & Grow</a></li>
+        <li><a href="quiz.html">Quizzes</a></li>
+      </ul>
+    </div>
+  </header>
+<main>
+    <h2>Personality Quiz 📝</h2>
+    <form id="quizForm">
+      <label><input type="radio" name="q" value="1"> I love planning and journaling</label><br>
+      <label><input type="radio" name="q" value="2"> Skincare is my therapy</label><br>
+      <label><input type="radio" name="q" value="3"> Books are my escape</label><br><br>
+      <button type="submit">Submit</button>
+    </form>
+    <p id="quizResult"></p>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 The Velvet Journal | All rights reserved.</p>
+  </footer>
+</body>
+</html>
+  
