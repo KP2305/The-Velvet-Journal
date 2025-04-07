@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quiz | The Velvet Journal</title>
+  <title>Quizzes | The Velvet Journal</title>
   <link rel="stylesheet" href="styless.css">
   <script src="script.js"></script>
 </head>
@@ -16,24 +16,178 @@
         <li><a href="index.html">Home</a></li>
         <li><a href="shelf.html">The Velvet Shelf</a></li>
         <li><a href="glow.html">Glow & Grow</a></li>
-        <li><a href="quiz.html">Quizzes</a></li>
+        <li><a href="quiz.html">Quizzes</a></li> 
       </ul>
     </div>
   </header>
-<main>
-    <h2>Personality Quiz 📝</h2>
-    <form id="quizForm">
-      <label><input type="radio" name="q" value="1"> I love planning and journaling</label><br>
-      <label><input type="radio" name="q" value="2"> Skincare is my therapy</label><br>
-      <label><input type="radio" name="q" value="3"> Books are my escape</label><br><br>
-      <button type="submit">Submit</button>
-    </form>
-    <p id="quizResult"></p>
+
+  <main>
+    <h2>Quizzes</h2>
+    <!-- Quiz Navigation (within the page) -->
+    <div id="quizMenu">
+      <button onclick="showQuiz('bookGenre')">What Book Genre Are You?</button>
+      <button onclick="showQuiz('aesthetic')">What Aesthetic Are You?</button>
+      <button onclick="showQuiz('affirmation')">What Affirmation Do You Need?</button>
+    </div>
+
+    <!-- Book Genre Quiz -->
+    <div id="bookGenre" class="quiz-section">
+      <h3>What Book Genre Are You?</h3>
+      <form id="genreQuizForm">
+        <p>How do you like to spend your weekends?</p>
+        <label><input type="radio" name="q1" value="Romance"> A) Reading a cozy romance</label><br>
+        <label><input type="radio" name="q1" value="Thriller"> B) Watching mystery thrillers</label><br>
+        <label><input type="radio" name="q1" value="Fantasy"> C) Exploring fantasy worlds</label><br><br>
+
+        <p>Your ideal vacation would be:</p>
+        <label><input type="radio" name="q2" value="Romance"> A) A beachside getaway</label><br>
+        <label><input type="radio" name="q2" value="Thriller"> B) A haunted mansion tour</label><br>
+        <label><input type="radio" name="q2" value="Fantasy"> C) A magical forest retreat</label><br><br>
+
+        <p>What’s your favorite season?</p>
+        <label><input type="radio" name="q3" value="Romance"> A) Winter, for cozy nights</label><br>
+        <label><input type="radio" name="q3" value="Thriller"> B) Fall, for eerie vibes</label><br>
+        <label><input type="radio" name="q3" value="Fantasy"> C) Spring, for new adventures</label><br><br>
+
+        <button type="button" onclick="calculateGenre()">Submit</button>
+      </form>
+      <p id="genreResult"></p>
+    </div>
+
+    <!-- Aesthetic Quiz -->
+    <div id="aesthetic" class="quiz-section">
+      <h3>What Aesthetic Are You?</h3>
+      <form id="aestheticQuizForm">
+        <p>How would you describe your ideal outfit?</p>
+        <label><input type="radio" name="q1" value="Coquette"> A) Soft, delicate, and feminine</label><br>
+        <label><input type="radio" name="q1" value="Dark Feminine"> B) Bold, edgy, with dark vibes</label><br>
+        <label><input type="radio" name="q1" value="Grunge"> C) Vintage, with a rebellious touch</label><br><br>
+
+        <p>Your ideal environment is:</p>
+        <label><input type="radio" name="q2" value="Coquette"> A) Elegant and serene</label><br>
+        <label><input type="radio" name="q2" value="Dark Feminine"> B) Moody, mysterious, and dimly lit</label><br>
+        <label><input type="radio" name="q2" value="Grunge"> C) Industrial, with a creative mess</label><br><br>
+
+        <p>Your perfect hobby is:</p>
+        <label><input type="radio" name="q3" value="Coquette"> A) Reading love stories with tea</label><br>
+        <label><input type="radio" name="q3" value="Dark Feminine"> B) Painting dark, abstract art</label><br>
+        <label><input type="radio" name="q3" value="Grunge"> C) Thrifting for unique finds</label><br><br>
+
+        <button type="button" onclick="calculateAesthetic()">Submit</button>
+      </form>
+      <p id="aestheticResult"></p>
+    </div>
+
+    <!-- Affirmation Quiz -->
+    <div id="affirmation" class="quiz-section">
+      <h3>What Affirmation Do You Need?</h3>
+      <form id="affirmationQuizForm">
+        <p>How do you feel about your current journey in life?</p>
+        <label><input type="radio" name="q1" value="affirmation1"> A) Excited but unsure of the path</label><br>
+        <label><input type="radio" name="q1" value="affirmation2"> B) Confident and on track</label><br>
+        <label><input type="radio" name="q1" value="affirmation3"> C) Overwhelmed and stressed</label><br><br>
+
+        <p>How do you usually handle challenges?</p>
+        <label><input type="radio" name="q2" value="affirmation1"> A) I trust my instincts and take risks</label><br>
+        <label><input type="radio" name="q2" value="affirmation2"> B) I stay calm and keep a positive mindset</label><br>
+        <label><input type="radio" name="q2" value="affirmation3"> C) I retreat and try to regroup</label><br><br>
+
+        <p>What’s your biggest fear right now?</p>
+        <label><input type="radio" name="q3" value="affirmation1"> A) Not finding my true purpose</label><br>
+        <label><input type="radio" name="q3" value="affirmation2"> B) Losing my confidence</label><br>
+        <label><input type="radio" name="q3" value="affirmation3"> C) Not being able to handle everything</label><br><br>
+
+        <button type="button" onclick="calculateAffirmation()">Submit</button>
+      </form>
+      <p id="affirmationResult"></p>
+    </div>
   </main>
 
   <footer>
     <p>&copy; 2025 The Velvet Journal | All rights reserved.</p>
   </footer>
+
+  <script>
+    function showQuiz(quizName) {
+      // Hide all quizzes
+      var quizzes = document.querySelectorAll('.quiz-section');
+      quizzes.forEach(function(quiz) {
+        quiz.style.display = 'none';
+      });
+
+      // Show selected quiz
+      document.getElementById(quizName).style.display = 'block';
+    }
+
+    // Default to showing the first quiz
+    showQuiz('bookGenre');
+
+    // Book Genre Quiz Logic
+    function calculateGenre() {
+      const form = document.getElementById('genreQuizForm');
+      const formData = new FormData(form);
+      let result = '';
+      let romanceCount = 0;
+      let thrillerCount = 0;
+      let fantasyCount = 0;
+
+      formData.forEach((value) => {
+        if (value === 'Romance') romanceCount++;
+        else if (value === 'Thriller') thrillerCount++;
+        else if (value === 'Fantasy') fantasyCount++;
+      });
+
+      if (romanceCount > thrillerCount && romanceCount > fantasyCount) {
+        result = 'You are a Romance lover!';
+      } else if (thrillerCount > romanceCount && thrillerCount > fantasyCount) {
+        result = 'You are a Thriller mystery enthusiast!';
+      } else {
+        result = 'You are a Fantasy adventurer!';
+      }
+
+      document.getElementById('genreResult').innerText = result;
+    }
+
+    // Aesthetic Quiz Logic
+    function calculateAesthetic() {
+      const form = document.getElementById('aestheticQuizForm');
+      const formData = new FormData(form);
+      let result = '';
+      let coquetteCount = 0;
+      let darkFeminineCount = 0;
+      let grungeCount = 0;
+
+      formData.forEach((value) => {
+        if (value === 'Coquette') coquetteCount++;
+        else if (value === 'Dark Feminine') darkFeminineCount++;
+        else if (value === 'Grunge') grungeCount++;
+      });
+
+      if (coquetteCount > darkFeminineCount && coquetteCount > grungeCount) {
+        result = 'You are a Coquette aesthetic!';
+      } else if (darkFeminineCount > coquetteCount && darkFeminineCount > grungeCount) {
+        result = 'You are a Dark Feminine aesthetic!';
+      } else {
+        result = 'You are a Grunge aesthetic!';
+      }
+
+      document.getElementById('aestheticResult').innerText = result;
+    }
+
+    // Affirmation Quiz Logic
+    function calculateAffirmation() {
+      const form = document.getElementById('affirmationQuizForm');
+      const formData = new FormData(form);
+      let result = '';
+
+      formData.forEach((value) => {
+        if (value === 'affirmation1') result = 'Believe in yourself. You are on the right path!';
+        else if (value === 'affirmation2') result = 'Stay confident. You are capable of handling anything!';
+        else if (value === 'affirmation3') result = 'Take a deep breath. You’ve got this. Stay grounded!';
+      });
+
+      document.getElementById('affirmationResult').innerText = result;
+    }
+  </script>
 </body>
 </html>
-  

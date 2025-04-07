@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Profile</title>
+  <link rel="stylesheet" href="styless.css"/>
+  <script src="script.js"></script>
+</head>
+
+<body>
+  <header>
+    <div class="nav-container">
+      <div class="logo">The Velvet Journal</div>
+      <div class="hamburger" onclick="toggleNav()">&#9776;</div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="shelf.html">The Velvet Shelf</a></li>
+        <li><a href="glow.html">Glow & Grow</a></li>
+        <li><a href="quiz.html">Quizzes</a></li>
+        <!-- Show Profile link if logged in, else Login/Signup -->
+        <li id="profileLink" style="display:none;"><a href="profile.html">Profile</a></li>
+        <li id="loginLink"><a href="profile.html">Login</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="mainContent">
+    <!-- Profile Section -->
+    <div id="profileSection" style="display:none;">
+      <h2>Welcome, User!</h2>
+      <p>Here is your profile.</p>
+      <button onclick="logout()">Logout</button>
+    </div>
+
+    <!-- Login/Signup Section -->
+    <div id="authSection">
+      <h2>Login or Sign Up</h2>
+
+      <!-- Login Form -->
+      <div id="loginForm">
+        <form id="loginFormElement">
+          <label for="username">Username:</label>
+          <input type="text" id="loginUsername" name="username" required>
+
+          <label for="password">Password:</label>
+          <input type="password" id="loginPassword" name="password" required>
+
+          <button type="submit">Login</button>
+        </form>
+      </div>
+
+      <!-- Signup Form -->
+      <div id="signupForm" style="display:none;">
+        <form id="signupFormElement">
+          <label for="username">Username:</label>
+          <input type="text" id="signupUsername" name="username" required>
+
+          <label for="email">Email:</label>
+          <input type="email" id="signupEmail" name="email" required>
+
+          <label for="password">Password:</label>
+          <input type="password" id="signupPassword" name="password" required>
+
+          <button type="submit">Sign Up</button>
+        </form>
+      </div>
+
+      <!-- Toggle between Login and SignUp -->
+      <p id="toggleFormLink" onclick="toggleForm()">Don't have an account? Sign up</p>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 The Velvet Journal | All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Check if the user is logged in
+    if (localStorage.getItem("loggedIn")) {
+      document.getElementById("profileSection").style.display = "block";
+      document.getElementById("authSection").style.display = "none";
+      document.getElementById("profileLink").style.display = "inline";
+      document.getElementById("loginLink").style.display = "none";
+    } else {
+      document.getElementById("profileSection").style.display = "none";
+      document.getElementById("authSection").style.display = "block";
+      document.getElementById("profileLink").style.display = "none";
+      document.getElementById("loginLink").style.display = "inline";
+    }
+
+    // Login form handling
+    document.getElementById("loginFormElement").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const username = document.getElementById("loginUsername").value;
+      const password = document.getElementById("loginPassword").value;
+
+      if (username === "user" && password === "password") {
+        localStorage.setItem("loggedIn", true);
+        window.location.reload(); // Reload to show profile after login
+      } else {
+        alert("Invalid credentials");
+      }
+    });
+
+    // Sign-up form handling
+    document.getElementById("signupFormElement").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const username = document.getElementById("signupUsername").value;
+      const email = document.getElementById("signupEmail").value;
+      const password = document.getElementById("signupPassword").value;
+
+      alert("Account created!");
+      localStorage.setItem("loggedIn", true);
+      window.location.reload(); // Reload to show profile after signup
+    });
+
+    // Logout function
+    function logout() {
+      localStorage.removeItem("loggedIn");
+      window.location.reload(); // Reload to show login/signup
+    }
+
+    // Toggle between Login and Sign Up forms
+    function toggleForm() {
+      const loginForm = document.getElementById("loginForm");
+      const signupForm = document.getElementById("signupForm");
+      const toggleLink = document.getElementById("toggleFormLink");
+
+      if (loginForm.style.display === "none") {
+        loginForm.style.display = "block";
+        signupForm.style.display = "none";
+        toggleLink.textContent = "Don't have an account? Sign up";
+      } else {
+        loginForm.style.display = "none";
+        signupForm.style.display = "block";
+        toggleLink.textContent = "Already have an account? Login";
+      }
+    }
+  </script>
+</body>
+</html>

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Velvet Shelf</title>
   <link rel="stylesheet" href="styless.css">
-  
+  <script src="script.js"></script>
 </head>
 <body>
     <header>
@@ -27,9 +27,9 @@
     <section>
       <h3>Book Recommendations</h3>
       <ul>
-        <li><strong>The Midnight Library</strong> - A magical story about regrets, parallel lives, and second chances.</li>
-        <li><strong>Big Magic</strong> - Embrace creativity without fear.</li>
-        <li><strong>The Alchemist</strong> - A story about following your dreams.</li>
+        <li><strong>The Midnight Library</strong> – A magical story about regrets, parallel lives, and second chances.</li>
+        <li><strong>Big Magic</strong> – Embrace creativity without fear.</li>
+        <li><strong>The Alchemist</strong> – A story about following your dreams.</li>
       </ul>
     </section>
   
@@ -40,22 +40,26 @@
         <li>What does "peace" mean to me?</li>
         <li>How can I show up for myself this week?</li>
       </ul>
-      <textarea placeholder="Write your thoughts here..."></textarea>
+      <textarea id="journalNote" placeholder="Write your thoughts here..."></textarea>
       <button onclick="saveNote()">Save Note</button>
       <p id="saveMsg"></p>
     </section>
   
     <section>
-      <h3>Reader's Picks</h3>
-      <p>Submit your favorite read via <a href="https://forms.gle/fake-link" target="_blank">this form</a>.</p>
+      <h3>Your Saved Journal Notes</h3>
+      <ul id="savedNotesList"></ul> <!-- List of saved notes will appear here -->
     </section>
-
+  
+    <section>
+      <h3>Reader's Picks</h3>
+      <p>Submit your favorite read below — it may be featured on the blog ✨</p>
+      <p><a href="https://form.jotform.com/250957441193057" target="_blank">Click here to share yours</a></p>
+    </section>
   </main>
 
   <footer>
     <p>&copy; 2025 The Velvet Journal | All rights reserved.</p>
   </footer>
-  <script src="script.js"></script>
+
 </body>
 </html>
-  
