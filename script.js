@@ -72,3 +72,24 @@ function deleteNote(index) {
 window.onload = function() {
   displaySavedNotes();
 }
+
+const quotes = [
+    '"You are enough, just as you are." — Meghan Markle',
+    '"Be messy and complicated and afraid — and show up anyway." — Glennon Doyle',
+    '"To love oneself is the beginning of a lifelong romance." — Oscar Wilde'
+  ];
+  let qIndex = 0;
+  setInterval(() => {
+    document.querySelector(".quote").textContent = quotes[qIndex];
+    qIndex = (qIndex + 1) % quotes.length;
+  }, 6000);
+  
+  const tips = [
+  "Take 10 deep breaths — reset your nervous system.",
+  "Drink water before your coffee today!",
+  "Say one kind thing to yourself right now.",
+  "Take a 5-minute sunlight break"
+];
+document.getElementById("dailyTip").textContent = tips[Math.floor(Math.random() * tips.length)];
+
+
