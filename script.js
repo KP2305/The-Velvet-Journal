@@ -73,6 +73,10 @@ window.onload = function() {
   displaySavedNotes();
 }
 
+function toggleNav() {
+    document.getElementById("navLinks").classList.toggle("show");
+  }
+
 const quotes = [
     '"You are enough, just as you are." — Meghan Markle',
     '"Be messy and complicated and afraid — and show up anyway." — Glennon Doyle',
