@@ -2,11 +2,31 @@ html, body {
   height: 100%;
 }
 
+h1 {
+  font-family: 'Cinzel', serif;
+  color: #f7bbbb;
+  text-align: center;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-weight: bold;
+  padding-left: 1rem;
+}
+
+h2, h3 {
+  font-family: 'Cinzel', serif;
+  color: #f7bbbb;
+  text-align: center;
+  letter-spacing: 2px;
+  text-transform: capitalize;
+  font-weight: bold;
+  padding-left: 1rem;
+}
+
 body {
   display: flex;
   flex-direction: column;
   margin: 0;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: 'Cinzel', serif;
   background: #660000; /* Deep red background */
   color: #ffffff; /* White text */
 }
@@ -75,6 +95,19 @@ header {
 main {
   padding: 2rem;
   flex: 1;
+}
+
+.hero {
+  background: linear-gradient(to bottom, #000000aa, #660000dd), url('your-image.jpg') center/cover no-repeat;
+  color: white;
+  padding: 5rem 2rem;
+  text-align: center;
+}
+
+.card:hover, .column:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
 }
 
 blockquote.quote {
