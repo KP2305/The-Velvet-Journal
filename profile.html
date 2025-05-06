@@ -75,68 +75,85 @@
     <p>&copy; 2025 The Velvet Journal | All rights reserved.</p>
   </footer>
 
-  <script>
-    // Check if the user is logged in
-    if (localStorage.getItem("loggedIn")) {
-      document.getElementById("profileSection").style.display = "block";
-      document.getElementById("authSection").style.display = "none";
-      document.getElementById("profileLink").style.display = "inline";
-      document.getElementById("loginLink").style.display = "none";
-    } else {
-      document.getElementById("profileSection").style.display = "none";
-      document.getElementById("authSection").style.display = "block";
-      document.getElementById("profileLink").style.display = "none";
-      document.getElementById("loginLink").style.display = "inline";
-    }
+ <script>
+  const backendURL = "https://replit.com/@krishapatel2305/velvetjournal-backend"; // Backend URL from replit
 
-    // Login form handling
-    document.getElementById("loginFormElement").addEventListener("submit", function(e) {
-      e.preventDefault();
-      const username = document.getElementById("loginUsername").value;
-      const password = document.getElementById("loginPassword").value;
+  // Show/hide based on login
+  if (localStorage.getItem("loggedIn")) {
+    document.getElementById("profileSection").style.display = "block";
+    document.getElementById("authSection").style.display = "none";
+    document.getElementById("profileLink").style.display = "inline";
+    document.getElementById("loginLink").style.display = "none";
+  } else {
+    document.getElementById("profileSection").style.display = "none";
+    document.getElementById("authSection").style.display = "block";
+    document.getElementById("profileLink").style.display = "none";
+    document.getElementById("loginLink").style.display = "inline";
+  }
 
-      if (username === "user" && password === "password") {
-        localStorage.setItem("loggedIn", true);
-        window.location.reload(); // Reload to show profile after login
-      } else {
-        alert("Invalid credentials");
-      }
+  // LOGIN FORM
+  document.getElementById("loginFormElement").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const username = document.getElementById("loginUsername").value;
+    const password = document.getElementById("loginPassword").value;
+
+    const res = await fetch(`${backendURL}/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, password }),
     });
 
-    // Sign-up form handling
-    document.getElementById("signupFormElement").addEventListener("submit", function(e) {
-      e.preventDefault();
-      const username = document.getElementById("signupUsername").value;
-      const email = document.getElementById("signupEmail").value;
-      const password = document.getElementById("signupPassword").value;
-
-      alert("Account created!");
+    const msg = await res.text();
+    alert(msg);
+    if (res.ok) {
       localStorage.setItem("loggedIn", true);
-      window.location.reload(); // Reload to show profile after signup
+      window.location.reload();
+    }
+  });
+
+  // SIGNUP FORM
+  document.getElementById("signupFormElement").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const username = document.getElementById("signupUsername").value;
+    const email = document.getElementById("signupEmail").value;
+    const password = document.getElementById("signupPassword").value;
+
+    const res = await fetch(`${backendURL}/signup`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, email, password }),
     });
 
-    // Logout function
-    function logout() {
-      localStorage.removeItem("loggedIn");
-      window.location.reload(); // Reload to show login/signup
+    const msg = await res.text();
+    alert(msg);
+    if (res.ok) {
+      localStorage.setItem("loggedIn", true);
+      window.location.reload();
     }
+  });
 
-    // Toggle between Login and Sign Up forms
-    function toggleForm() {
-      const loginForm = document.getElementById("loginForm");
-      const signupForm = document.getElementById("signupForm");
-      const toggleLink = document.getElementById("toggleFormLink");
+  function logout() {
+    localStorage.removeItem("loggedIn");
+    window.location.reload();
+  }
 
-      if (loginForm.style.display === "none") {
-        loginForm.style.display = "block";
-        signupForm.style.display = "none";
-        toggleLink.textContent = "Don't have an account? Sign up";
-      } else {
-        loginForm.style.display = "none";
-        signupForm.style.display = "block";
-        toggleLink.textContent = "Already have an account? Login";
-      }
+  function toggleForm() {
+    const loginForm = document.getElementById("loginForm");
+    const signupForm = document.getElementById("signupForm");
+    const toggleLink = document.getElementById("toggleFormLink");
+
+    if (loginForm.style.display === "none") {
+      loginForm.style.display = "block";
+      signupForm.style.display = "none";
+      toggleLink.textContent = "Don't have an account? Sign up";
+    } else {
+      loginForm.style.display = "none";
+      signupForm.style.display = "block";
+      toggleLink.textContent = "Already have an account? Login";
     }
-  </script>
+  }
+</script>
 </body>
 </html>
