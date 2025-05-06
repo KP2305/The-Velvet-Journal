@@ -3,157 +3,169 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Profile</title>
-  <link rel="stylesheet" href="styless.css"/>
-  <script src="script.js"></script>
+  <title>The Velvet Journal | Login / Sign Up</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Inter&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom, #1a0000, #400000);
+      font-family: 'Inter', sans-serif;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .auth-box {
+      background-color: #1a0000;
+      border: 2px solid #a47551;
+      border-radius: 16px;
+      width: 400px;
+      padding: 40px;
+      box-shadow: 0 0 20px rgba(255, 204, 204, 0.1);
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      text-align: center;
+      margin-bottom: 30px;
+      color: #d7bfa6;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #944d35;
+      background-color: #2c0000;
+      color: #fff;
+      border-radius: 10px;
+      font-size: 14px;
+    }
+
+    input::placeholder {
+      color: #c0a191;
+    }
+
+    button {
+      background-color: #a47551;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      width: 100%;
+      font-size: 15px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
+    button:hover {
+      background-color: #8c6041;
+    }
+
+    .toggle-link {
+      margin-top: 15px;
+      font-size: 13px;
+      color: #d7bfa6;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .toggle-link:hover {
+      text-decoration: underline;
+    }
+
+    #signupForm {
+      display: none;
+    }
+  </style>
 </head>
 
 <body>
-  <header>
-    <div class="nav-container">
-      <div class="logo">The Velvet Journal</div>
-      <div class="hamburger" onclick="toggleNav()">&#9776;</div>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="shelf.html">The Velvet Shelf</a></li>
-        <li><a href="glow.html">Glow & Grow</a></li>
-        <li><a href="quiz.html">Quizzes</a></li>
-        <!-- Show Profile link if logged in, else Login/Signup -->
-        <li id="profileLink" style="display:none;"><a href="profile.html">Profile</a></li>
-        <li id="loginLink"><a href="profile.html">Login</a></li>
-      </ul>
-    </div>
-  </header>
+  <div class="auth-box">
+    <h2 id="formTitle">Login</h2>
 
-  <main id="mainContent">
-    <!-- Profile Section -->
-    <div id="profileSection" style="display:none;">
-      <h2>Welcome, User!</h2>
-      <p>Here is your profile.</p>
-      <button onclick="logout()">Logout</button>
-    </div>
+    <!-- Login Form -->
+    <form id="loginForm">
+      <input type="text" id="loginUsername" placeholder="Username" required />
+      <input type="password" id="loginPassword" placeholder="Password" required />
+      <button type="submit">Login</button>
+    </form>
 
-    <!-- Login/Signup Section -->
-    <div id="authSection">
-      <h2>Login or Sign Up</h2>
+    <!-- Signup Form -->
+    <form id="signupForm">
+      <input type="text" id="signupUsername" placeholder="Username" required />
+      <input type="email" id="signupEmail" placeholder="Email" required />
+      <input type="password" id="signupPassword" placeholder="Password" required />
+      <button type="submit">Sign Up</button>
+    </form>
 
-      <!-- Login Form -->
-      <div id="loginForm">
-        <form id="loginFormElement">
-          <label for="username">Username:</label>
-          <input type="text" id="loginUsername" name="username" required>
+    <p class="toggle-link" onclick="toggleForm()">Don't have an account? Sign up</p>
+  </div>
 
-          <label for="password">Password:</label>
-          <input type="password" id="loginPassword" name="password" required>
-
-          <button type="submit">Login</button>
-        </form>
-      </div>
-
-      <!-- Signup Form -->
-      <div id="signupForm" style="display:none;">
-        <form id="signupFormElement">
-          <label for="username">Username:</label>
-          <input type="text" id="signupUsername" name="username" required>
-
-          <label for="email">Email:</label>
-          <input type="email" id="signupEmail" name="email" required>
-
-          <label for="password">Password:</label>
-          <input type="password" id="signupPassword" name="password" required>
-
-          <button type="submit">Sign Up</button>
-        </form>
-      </div>
-
-      <!-- Toggle between Login and SignUp -->
-      <p id="toggleFormLink" onclick="toggleForm()">Don't have an account? Sign up</p>
-    </div>
-  </main>
-
-  <footer>
-    <p>&copy; 2025 The Velvet Journal | All rights reserved.</p>
-  </footer>
-
- <script>
-  const backendURL = "https://replit.com/@krishapatel2305/velvetjournal-backend"; // Backend URL from replit
-
-  // Show/hide based on login
-  if (localStorage.getItem("loggedIn")) {
-    document.getElementById("profileSection").style.display = "block";
-    document.getElementById("authSection").style.display = "none";
-    document.getElementById("profileLink").style.display = "inline";
-    document.getElementById("loginLink").style.display = "none";
-  } else {
-    document.getElementById("profileSection").style.display = "none";
-    document.getElementById("authSection").style.display = "block";
-    document.getElementById("profileLink").style.display = "none";
-    document.getElementById("loginLink").style.display = "inline";
-  }
-
-  // LOGIN FORM
-  document.getElementById("loginFormElement").addEventListener("submit", async function (e) {
-    e.preventDefault();
-
-    const username = document.getElementById("loginUsername").value;
-    const password = document.getElementById("loginPassword").value;
-
-    const res = await fetch(`${backendURL}/login`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, password }),
-    });
-
-    const msg = await res.text();
-    alert(msg);
-    if (res.ok) {
-      localStorage.setItem("loggedIn", true);
-      window.location.reload();
-    }
-  });
-
-  // SIGNUP FORM
-  document.getElementById("signupFormElement").addEventListener("submit", async function (e) {
-    e.preventDefault();
-
-    const username = document.getElementById("signupUsername").value;
-    const email = document.getElementById("signupEmail").value;
-    const password = document.getElementById("signupPassword").value;
-
-    const res = await fetch(`${backendURL}/signup`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, email, password }),
-    });
-
-    const msg = await res.text();
-    alert(msg);
-    if (res.ok) {
-      localStorage.setItem("loggedIn", true);
-      window.location.reload();
-    }
-  });
-
-  function logout() {
-    localStorage.removeItem("loggedIn");
-    window.location.reload();
-  }
-
-  function toggleForm() {
+  <script>
     const loginForm = document.getElementById("loginForm");
     const signupForm = document.getElementById("signupForm");
-    const toggleLink = document.getElementById("toggleFormLink");
+    const formTitle = document.getElementById("formTitle");
+    const toggleText = document.querySelector(".toggle-link");
 
-    if (loginForm.style.display === "none") {
-      loginForm.style.display = "block";
-      signupForm.style.display = "none";
-      toggleLink.textContent = "Don't have an account? Sign up";
-    } else {
-      loginForm.style.display = "none";
-      signupForm.style.display = "block";
-      toggleLink.textContent = "Already have an account? Login";
+    function toggleForm() {
+      if (loginForm.style.display === "none") {
+        loginForm.style.display = "block";
+        signupForm.style.display = "none";
+        formTitle.textContent = "Login";
+        toggleText.textContent = "Don't have an account? Sign up";
+      } else {
+        loginForm.style.display = "none";
+        signupForm.style.display = "block";
+        formTitle.textContent = "Sign Up";
+        toggleText.textContent = "Already have an account? Login";
+      }
     }
-  }
-</script>
+
+    loginForm.addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const username = document.getElementById("loginUsername").value;
+      const password = document.getElementById("loginPassword").value;
+
+      const res = await fetch("https://velvetjournal-backend.krishapatel2305.repl.co/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password })
+      });
+
+      const msg = await res.text();
+      alert(msg);
+      if (res.ok) {
+        localStorage.setItem("loggedIn", true);
+        window.location.href = "profile.html"; // redirect on login
+      }
+    });
+
+    signupForm.addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const username = document.getElementById("signupUsername").value;
+      const email = document.getElementById("signupEmail").value;
+      const password = document.getElementById("signupPassword").value;
+
+      const res = await fetch("https://velvetjournal-backend.krishapatel2305.repl.co/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, email, password })
+      });
+
+      const msg = await res.text();
+      alert(msg);
+      if (res.ok) {
+        localStorage.setItem("loggedIn", true);
+        window.location.href = "profile.html"; // redirect on signup
+      }
+    });
+  </script>
 </body>
 </html>
