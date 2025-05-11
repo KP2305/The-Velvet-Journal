@@ -47,7 +47,7 @@ document.getElementById("signupFormElement").addEventListener("submit", async fu
 });
 
 // Toggle between login/signup forms
-function toggleFormLink() {
+function toggleForm() {
   const loginForm = document.getElementById("loginFormElement");
   const signupForm = document.getElementById("signupFormElement");
   const toggleLink = document.getElementById("toggleFormLink");
