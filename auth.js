@@ -45,6 +45,23 @@ document.getElementById("signupFormElement").addEventListener("submit", async fu
   }
 });
 
+// Toggle between login/signup forms
+function toggleForm() {
+  const loginForm = document.getElementById("loginFormElement");
+  const signupForm = document.getElementById("signupFormElement");
+  const toggleLink = document.getElementById("toggleFormLink");
+
+  if (loginForm.style.display === "none") {
+    loginForm.style.display = "block";
+    signupForm.style.display = "none";
+    toggleLink.textContent = "Don't have an account? Sign up";
+  } else {
+    loginForm.style.display = "none";
+    signupForm.style.display = "block";
+    toggleLink.textContent = "Already have an account? Login";
+  }
+}
+
 // LOGOUT
 function logout() {
   localStorage.clear();
