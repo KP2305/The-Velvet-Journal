@@ -13,7 +13,7 @@
         color: #780808;
         text-decoration: underline;
         }
-  </style>
+  <\style>
 
 // LOGIN
 document.getElementById("loginFormElement").addEventListener("submit", async function(e) {
