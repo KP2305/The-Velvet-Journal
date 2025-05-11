@@ -78,6 +78,21 @@ header {
   color: #ffcccc; /* Soft red hover */
 }
 
+.toggleFormLink {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  text-align: center;
+  color: white;
+  cursor: pointer;
+  text-decoration: none;
+  margin-top: 15px;
+}
+
+.toggleFormLink:hover {
+  color: #d7bfa6;
+  text-decoration: underline;
+}
+
 .search-box input {
   padding: 0.4rem;
   border-radius: 5px;
