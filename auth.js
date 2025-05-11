@@ -1,3 +1,19 @@
+<style>
+  .toggleFormLink {
+        margin-top: 15px;
+        font-size: 13px;
+        text-align: center;
+        color: white;
+        cursor: pointer;
+        display: block;
+        transition: color 0.3s ease, text-decoration 0.3s ease;
+        }
+
+    .toggleFormLink:hover {
+        color: #780808;
+        text-decoration: underline;
+        }
+  </style>
 
 // LOGIN
 document.getElementById("loginFormElement").addEventListener("submit", async function(e) {
