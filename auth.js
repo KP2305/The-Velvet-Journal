@@ -1,19 +1,3 @@
-<style>
-  .toggleFormLink {
-        margin-top: 15px;
-        font-size: 13px;
-        text-align: center;
-        color: white;
-        cursor: pointer;
-        display: block;
-        transition: color 0.3s ease, text-decoration 0.3s ease;
-        }
-
-    .toggleFormLink:hover {
-        color: #780808;
-        text-decoration: underline;
-        }
-  <\style>
 
 // LOGIN
 document.getElementById("loginFormElement").addEventListener("submit", async function(e) {
@@ -63,7 +47,7 @@ document.getElementById("signupFormElement").addEventListener("submit", async fu
 });
 
 // Toggle between login/signup forms
-function toggleForm() {
+function toggleFormLink() {
   const loginForm = document.getElementById("loginFormElement");
   const signupForm = document.getElementById("signupFormElement");
   const toggleLink = document.getElementById("toggleFormLink");
