@@ -58,7 +58,7 @@
     }
 
  
-    #toggleFormLink {
+    .toggle-link {
         margin-top: 15px;
         font-size: 13px;
         text-align: center;
@@ -68,7 +68,7 @@
         transition: color 0.3s ease, text-decoration 0.3s ease;
         }
 
-    #toggleFormLink:hover {
+    .toggle-link:hover {
         color: #780808;
         text-decoration: underline;
         }
@@ -91,55 +91,87 @@
     </div>
   </header>
   
- <main id="mainContent">
-    <!-- Auth Container -->
-    <div class="auth-box" id="authSection">
-      <h2 id="formTitle">Login</h2>
+  <div class="auth-box">
+    <h2 id="formTitle">Login</h2>
 
-      <!-- Login Form -->
-<form id="loginFormElement" style="display: block;">
-  <label for="loginUsername">Username:</label>
-  <input type="text" id="loginUsername" name="username" required>
+    <!-- Login Form -->
+    <form id="loginForm" onsubmit="return false;">
+      <input type="text" id="loginUsername" placeholder="Username" required />
+      <input type="password" id="loginPassword" placeholder="Password" required />
+      <button type="submit">Login</button>
+    </form>
 
-  <label for="loginPassword">Password:</label>
-  <input type="password" id="loginPassword" name="password" required>
+    <!-- Signup Form -->
+    <form id="signupForm" onsubmit="return false;">
+      <input type="text" id="signupUsername" placeholder="Username" required />
+      <input type="email" id="signupEmail" placeholder="Email" required />
+      <input type="password" id="signupPassword" placeholder="Password" required />
+      <button type="submit">Sign Up</button>
+    </form>
 
-  <button type="submit">Login</button>
-</form>
+    <p class="toggle-link" onclick="toggleForm()">Don't have an account? Sign up</p>
+  </div>
 
-<!-- Signup Form -->
-<form id="signupFormElement" style="display: none;">
-  <label for="signupUsername">Username:</label>
-  <input type="text" id="signupUsername" name="username" required>
+  <script>
+    const backendURL = "https://velvetjournal-backend.krishapatel2305.repl.co";
 
-  <label for="signupEmail">Email:</label>
-  <input type="email" id="signupEmail" name="email" required>
+    const loginForm = document.getElementById("loginForm");
+    const signupForm = document.getElementById("signupForm");
+    const formTitle = document.getElementById("formTitle");
+    const toggleText = document.querySelector(".toggle-link");
 
-  <label for="signupPassword">Password:</label>
-  <input type="password" id="signupPassword" name="password" required>
+    function toggleForm() {
+      if (loginForm.style.display === "none") {
+        loginForm.style.display = "block";
+        signupForm.style.display = "none";
+        formTitle.textContent = "Login";
+        toggleText.textContent = "Don't have an account? Sign up";
+      } else {
+        loginForm.style.display = "none";
+        signupForm.style.display = "block";
+        formTitle.textContent = "Sign Up";
+        toggleText.textContent = "Already have an account? Login";
+      }
+    }
 
-  <button type="submit">Sign Up</button>
-</form>
+    loginForm.addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const username = document.getElementById("loginUsername").value;
+      const password = document.getElementById("loginPassword").value;
 
+      const res = await fetch(${backendURL}/login, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password })
+      });
 
-      <!-- Toggle between Login and SignUp -->
-      <p id="toggleFormLink" onclick="toggleForm()">Don't have an account? Sign up</p>
-    </div>
+      const msg = await res.text();
+      alert(msg);
+      if (res.ok) {
+        localStorage.setItem("loggedIn", true);
+        window.location.href = "profile.html";
+      }
+    });
 
-    <!-- Profile Section (after login) -->
-    <div class="auth-box" id="profileSection" style="display:none;">
-      <h2 id="welcomeMsg">Welcome, User!</h2>
-      <p>This is your profile page.</p>
-      <button onclick="logout()">Logout</button>
-    </div>
-  </main>
+    signupForm.addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const username = document.getElementById("signupUsername").value;
+      const email = document.getElementById("signupEmail").value;
+      const password = document.getElementById("signupPassword").value;
 
-  <script src="script.js"></script>
-  <script src="auth.js"></script>
+      const res = await fetch(${backendURL}/signup, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, email, password })
+      });
 
-  <footer>
-    <p>&copy; 2025 The Velvet Journal | All rights reserved.</p>
-  </footer>
-  
+      const msg = await res.text();
+      alert(msg);
+      if (res.ok) {
+        localStorage.setItem("loggedIn", true);
+        window.location.href = "profile.html";
+      }
+    });
+  </script>
 </body>
 </html>
